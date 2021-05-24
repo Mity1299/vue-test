@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<header>
+    <meta>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>CSS and style</title>
+</header>
+<body>
+
+    <div id="classObj">
+
+        <div
+            class="static"
+            v-bind:class="{active:isActive,'text-danger':hasError}"></div>
+    </div>
+    <script>
+        var vm = new Vue({
+            el:'#classObj',
+            data:{
+                isActive:true,
+                hasError:false
+            }
+        })
+    </script>
+
+    <div id="classArr">
+        直接应用一个class列表
+        <div v-bind:class="[activeClass,errorClass]"></div>
+        <div v-bind:class="[{active: isActive},errorClass]"></div>
+    </div>
+    <script>
+        var vue = new Vue({
+            el:"#classArr",
+            data:{
+                activeClass:"active",
+                errorClass:"text-danger",
+                isActive:false
+            }
+        })
+    </script>
+</body>
+</html>
