@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/vue@next"></script>
+    <style>
+        .slide-fade-enter-active{
+            transition: all 0.3s ease-out;
+        }
+
+        .slide-fade-leave-active{
+            transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1)
+        }
+
+        .slide-fade-enter-from,
+        .slide-fade-leave-to{
+            transform: translateX(20px);
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+<div id="demo">
+    <button @click="show = !show">
+        Toggle render
+    </button>
+
+    <transition name="slide-fade">
+        <p v-if="show">hello</p>
+    </transition>
+</div>
+
+<script>
+    const Demo = {
+        data(){
+            return{
+                show: true
+            }
+        }
+    }
+
+    Vue.createApp(Demo).mount('#demo');
+</script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/vue@next"></script>
+    <style>
+        .movearea{
+            transition: 0.2s background-color ease;
+        }
+    </style>
+</head>
+<body>
+<div id="demo">
+    <div
+        @mouseover="xCoordinate"
+        :style="{background:`hsl(${x},80%, 50%)`}"
+        class="movearea">
+        <h3>Move your mouse across the screen...</h3>
+        <p>x: {{x}}</p>
+    </div>
+</div>
+<script>
+    const Demo = {
+        data(){
+            return {
+                x: 0,
+            }
+        },
+        methods:{
+            xCoordinate(e){
+                this.x = e.clientX;
+            }
+        }
+    }
+
+    Vue.createApp(Demo).mount('#demo');
+</script>
+</body>
+</html>
