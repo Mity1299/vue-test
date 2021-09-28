@@ -40,3 +40,23 @@
 .tabs-content{
     padding: 8px 0;
 }
+
+.btn-close{
+    width: 20px;
+    height: 20px;
+    border-color: transparent;
+    border-radius: 50%;
+    background: transparent;
+}
+
+.btn-close:hover{
+    background: #eaeaea;
+    cursor:pointer;
+}
+
+.btn-close:before{
+    content: '×';
+    color: #5c6b77;
+    position: relative;
+    left: -1.5px;
+}

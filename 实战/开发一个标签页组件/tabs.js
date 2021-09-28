@@ -7,6 +7,7 @@ Vue.component('tabs', {
                     v-for="(item, index) in navList" 
                     @click="handleChange(index)"> 
                     {{ item.label }} 
+                  <button class="btn-close" v-if="item.closable" @click.stop="closeTab(index)"></button>
                 </div> 
             </div> 
             <div class="tabs-content"> 
@@ -18,10 +19,6 @@ Vue.component('tabs', {
         value: {
             type: [String, Number]
         },
-        closable:{
-            type:Boolean,
-            default: false
-        }
     },
     data: function () {
         return {
@@ -31,7 +28,33 @@ Vue.component('tabs', {
             closeList:[],
         }
     },
+    computed:{
+
+    },
     methods: {
+        getFilterTabs:function () {
+            var _this = this;
+            var navList = [];
+            this.getTabs().forEach(function (pane, index) {
+                if(_this.closeList.includes(pane.label)) return;
+
+                navList.push({
+                    label: pane.label,
+                    name: pane.name || index,
+                    closable: pane.closable
+                });
+                //如果没有给pane设置name,默认设置他的索引
+                if (!pane.name) pane.name = index;
+                if (index === 0) {
+                    if (!_this.currentValue) {
+                        _this.currentValue = pane.name || index;
+                    }
+                }
+
+            })
+
+            return navList;
+        },
         tabCls: function (item) {
             return [
                 'tabs-tab',
@@ -47,23 +70,7 @@ Vue.component('tabs', {
         },
         updateNav() {
             this.navList = [];
-            var _this = this;
-
-            this.getTabs().forEach(function (pane, index) {
-                // if(this.closeList.includes(pane.label)) return;
-
-                _this.navList.push({
-                    label: pane.label,
-                    name: pane.name || index
-                });
-                //如果没有给pane设置name,默认设置他的索引
-                if (!pane.name) pane.name = index;
-                if (index === 0) {
-                    if (!_this.currentValue) {
-                        _this.currentValue = pane.name || index;
-                    }
-                }
-            });
+            this.navList = this.getFilterTabs();
 
             this.updateStatus();
         },
@@ -87,12 +94,12 @@ Vue.component('tabs', {
             //触发一个自定义事件，供父级使用
             this.$emit('on-click', name);
         },
-        // closeTab:function (index) {
-        //     var nav = this.navList[index];
-        //     if(this.closeList.includes(nav.label)) return ;
-        //     this.closeList.push(nav.label);
-        //     this.updateNav();
-        // }
+        closeTab:function (index) {
+            var nav = this.navList[index];
+            if(this.closeList.includes(nav.label)) return ;
+            this.closeList.push(nav.label);
+            this.updateNav();
+        }
     },
     watch: {
         value: function (val) {
