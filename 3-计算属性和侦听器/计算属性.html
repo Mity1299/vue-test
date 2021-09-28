@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+
+<div id="computed-basics">
+    <p>Has published books</p>
+    <span>{{publishedBooksMessage}}</span>
+    <div>{{fullName}}</div>
+</div>
+<script>
+    Vue.createApp({
+        data(){
+            return{
+                author:{
+                    name:'John Doe',
+                    books: [
+                        'Vue 2 - Advanced Guid',
+                        'Vue 3 - Basic Guid',
+                        'Vue 4 - The Mystery'
+                    ],
+                },
+                firstName: 'Foo',
+                lastName: 'Bar',
+                fullName: 'Foo Bar'
+
+            }
+        },
+        //计算属性
+        computed:{
+            //计算属性的getter
+            publishedBooksMessage(){
+                return this.author.books.length > 0? 'Yes': 'No'
+            },
+            //可以自己加setter
+            fullName:{
+                get(){
+                    return this.firstName + ' ' + this.lastName;
+                },
+                set(newValue){
+                    const names = newValue.split(' ');
+                    this.firstName = names[0];
+                    this.lastName = names[names.length - 1];
+                }
+            }
+        }
+    }).mount('#computed-basics')
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+<div id="bind-attribute">
+<!--    v-bind是一个指令哦，该指令会在DOM上应用特殊的响应式行为-->
+  <span v-bind:title="message">
+    鼠标悬停几秒钟查看此处动态绑定的提示信息！
+  </span>
+</div>
+<script>
+    const AttributeBinding = {
+        data(){
+            return {
+                message: 'You loaded this page on ' + new Date().toLocaleDateString()
+            }
+        }
+    }
+
+    Vue.createApp(AttributeBinding).mount("#bind-attribute")
+</script>
+</body>
+</html>

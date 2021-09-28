@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+<div id="app">
+    <div :class="[activeClass, errorClass]">
+        测试
+    </div>
+</div>
+<script>
+    Vue.createApp({
+        data(){
+            return {
+                activeClass: 'active',
+                errorClass: 'text-danger'
+            }
+        }
+    }).mount('#app')
+</script>
+
+</body>
+</html>

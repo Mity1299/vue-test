@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+<div id="app">
+    <input v-model="message" placeholder="edit me">
+    <p style="white-space: pre-line">Message is: {{message}}</p>
+    <br/>
+    <span>multiline message is:</span>
+    <textarea v-model="message" placeholder="add multiple lines"></textarea>
+</div>
+<script>
+    Vue.createApp({
+        data(){
+            return {
+                message: null
+            }
+        }
+    }).mount('#app');
+</script>
+</body>
+</html>

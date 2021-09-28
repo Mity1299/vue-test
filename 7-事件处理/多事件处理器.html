@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+<div id="basic-event">
+    <button @click="greet($event), count($event)">Greet {{counter}}</button>
+</div>
+<script>
+    Vue.createApp({
+        data(){
+            return{
+                counter: 1,
+                name: 'Vue.js'
+            }
+        },
+        methods:{
+            greet(event){
+                //这里的this指向当前活动实例
+                alert('Hello ' + this.name + '!');
+            },
+            count(){
+                this.counter ++;
+            }
+        }
+    }).mount('#basic-event')
+</script>
+
+</body>
+</html>

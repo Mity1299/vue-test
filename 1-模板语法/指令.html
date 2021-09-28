@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+<div id="app">
+    <div><input v-bind:[attrName]="text"></div>
+    <div><input v-model="attrName"></div>
+<!--    修饰符.是特殊后缀，用于指出一个指令应该用特殊的方式绑定
+        在这里，.prevent修饰符的意思是，对触发事件调用event.preventDefault()-->
+    <form v-on:submit.prevent="onSubmit"></form>
+</div>
+    <script>
+        const MyVueInst = {
+            data(){
+                return {
+                    attrName:'type'
+                }
+            }
+        }
+
+        Vue.createApp(MyVueInst).mount("#app");
+
+
+    </script>
+</body>
+</html>

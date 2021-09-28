@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<!--    然而这个实验里并没有自动添加前缀-->
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+<div id="app">
+    <div :style="[basicStyle,moveStyle]">我要移动</div>
+</div>
+<script>
+    Vue.createApp({
+        data(){
+            return {
+                moveStyle:{
+                    transform: 'rotate(0.5turn)'
+                },
+                basicStyle:{
+                    height: '10vh',
+                    width: '10vw',
+                }
+            }
+        }
+    }).mount('#app');
+</script>
+</body>
+</html>

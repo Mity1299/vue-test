@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/vue@next"></script>
+    <style>
+        .static{
+            color: orange;
+        }
+
+        .active{
+            background-color: lightcoral;
+        }
+
+        .text-danger{
+            color: red;
+        }
+
+    </style>
+</head>
+<body>
+<div id="app">
+    <div :class="classObejct">
+        测试
+    </div>
+</div>
+<script>
+    Vue.createApp({
+        data(){
+            return {
+                isActive: true,
+                error: null
+            }
+        },
+        computed:{
+            classObject(){
+                return {
+                    active: this.isActive && !this.error,
+                    'text-danger': this.error && this.error.type === 'fatal'
+                }
+            }
+        }
+    }).mount('#app')
+</script>
+</body>
+</html>

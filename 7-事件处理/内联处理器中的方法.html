@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+<div id="inline-handler">
+    <button @click="say('hi')">Say hi</button>
+    <button @click="say('what')">Say what</button>
+    <button @click="warn('Form cannot be submitted yet.',$event)"></button>
+</div>
+<script>
+    Vue.createApp({
+        methods:{
+            say(message){
+                alert(message)
+            },
+            warn(message, event){
+                //这个是原生的event
+                if(event){
+                    event.preventDefault();
+                }
+                alert(message);
+            }
+        },
+    }).mount('#inline-handler')
+</script>
+</body>
+</html>

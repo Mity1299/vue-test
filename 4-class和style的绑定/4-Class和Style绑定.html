@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/vue@next"></script>
+    <style>
+        .static{
+            color: orange;
+        }
+
+        .active{
+            background-color: lightcoral;
+        }
+
+        .text-danger{
+            color: red;
+        }
+    </style>
+</head>
+<div id="app">
+
+    <div
+        class="static"
+        :class="{active: isActive, 'text-danger': hasError}">
+        测试
+    </div>
+    <div
+        class="static"
+        :class="classObejct">
+        class Object测试
+    </div>
+    <div>
+        <label for="isActive">isActive:{{isActive}}</label>
+        <input type="checkbox" v-model="isActive" id="isActive">
+    </div>
+    <div>
+        <label for="hasError">hasError:{{hasError}}</label>
+        <input type="checkbox" v-model="hasError" id="hasError">
+    </div>
+</div>
+<script>
+    Vue.createApp({
+        data(){
+            return {
+                isActive: true,
+                hasError: false,
+                classObject: {
+                    isActive: true,
+                    hasError: false,
+                }
+            }
+        }
+    }).mount('#app')
+</script>
+
+</body>
+</html>

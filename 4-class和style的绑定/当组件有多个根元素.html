@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+<div id="app">
+    <my-component class="baz"></my-component>
+</div>
+<script>
+    const app = Vue.createApp({});
+    app.component('my-component',{
+        template:
+            `<p :class="$attrs.class">Hi !</p>
+            <span>This is a child component</span>`
+    });
+
+    app.mount('#app');
+</script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+<div id="app">
+    <div v-bind:id="dynamicId">{{dynamicId}}</div>
+    <div>{{dynamicId.split('').reverse().join('')}}</div>
+    <input v-bind:disabled="isInputDisabled" v-model="dynamicId">
+    <div>
+        <input type="checkbox" v-model="isInputDisabled">
+    </div>
+</div>
+<script>
+    const MyVueInst = {
+        data(){
+            return{
+                dynamicId:"hello",
+                isInputDisabled:false
+            }
+        }
+    }
+
+    Vue.createApp(MyVueInst).mount("#app");
+</script>
+</body>
+</html>

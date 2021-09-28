@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+<div id="app">
+    <h1 v-show="awesome">Vue isawesome!</h1>
+    <h1>I'm always here</h1>
+    <input type="checkbox" v-model="awesome">
+</div>
+<script>
+    Vue.createApp({
+        data(){
+            return {
+                awesome:false
+            }
+        }
+    }).mount('#app');
+</script>
+
+</body>
+</html>

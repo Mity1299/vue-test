@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+<div id="blog-post-demo" class="demo">
+    <div :style="{ fontSize: postFontSize + 'em'}">
+        <blog-post v-for="post in posts" :key="post.id" :title="post.title"
+            @enlarge-text="postFontSize += 0.1"></blog-post>
+    </div>
+</div>
+<script>
+    const app = Vue.createApp({
+        data(){
+            return {
+                posts:[
+                    { id: 1, title: 'My journey with Vue' },
+                    { id: 2, title: 'Blogging with Vue' },
+                    { id: 3, title: 'Why Vue is so fun' }
+                ],
+                postFontSize: 1
+            }
+        }
+    });
+
+    app.component('blog-post',{
+        props:['title'],
+        emits:['enlarge-text'],
+        template:
+        `
+          <h4>{{title}}</h4>
+          <button @click="$emit('enlarge-text')">Enlarge text</button>
+        `
+    })
+
+    app.mount('#blog-post-demo')
+</script>
+</body>
+</html>

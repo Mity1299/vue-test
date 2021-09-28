@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/vue@next"></script>
+
+</head>
+<body>
+<div id="app">
+    <custom-input :model-value="searchText" @update:model-value="print"></custom-input>
+</div>
+<script>
+    const app = Vue.createApp({
+        data(){
+            return {
+                searchText: null
+            }
+        },
+        methods:{
+            print(value){
+                console.log('输入框已更新' + value);
+            }
+        }
+    });
+
+    app.component('custom-input', {
+        props: ['modelValue'],
+        template: `
+            <input v-model="value">
+          `,
+        computed: {
+            value: {
+                get() {
+                    return this.modelValue
+                },
+                set(value) { this.$emit('update:modelValue', value)
+                }
+            }
+        }
+    });
+
+    app.mount('#app');
+</script>
+</body>
+</html>

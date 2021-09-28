@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+<div id="app">
+    <input type="checkbox" v-model="toggle" true-value="yes" false-value="no">
+    {{toggle}}
+    <input type="radio" v-model="pick" :value="a">
+    {{pick}}
+    <select v-model="selected">
+        <option :value="{number:123}"> 123</option>
+        <option :value="{number:456}"> 456</option>
+    </select>
+    {{selected}}
+</div>
+<script>
+    Vue.createApp({
+        data(){
+            return {
+                toggle: 'yes',
+                pick: null,
+                selected: null,
+                a: 'test'
+            }
+        }
+    }).mount('#app')
+</script>
+</body>
+</html>

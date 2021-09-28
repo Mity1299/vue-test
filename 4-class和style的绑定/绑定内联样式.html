@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+<div id="app">
+    <div :style="{color: activeColor, fontSize: fontSize + 'px'}">
+        测试
+    </div>
+    <div :style="styleObject">
+        styleObject绑定测试
+    </div>
+    <div :style="[baseStyles, overridingStyles]">
+        数组绑定测试
+    </div>
+</div>
+<script>
+    Vue.createApp({
+        data(){
+            return {
+                activeColor: 'red',
+                fontSize: 30,
+                styleObject:{
+                    color: 'green',
+                    fontSize: 20,
+                },
+                baseStyles:{
+                    fontSize:30 + 'px',
+                    color:'black',
+                },
+                overridingStyles: {
+                    color:'orange',
+                    background:'black'
+                }
+
+            }
+        }
+    }).mount('#app');
+</script>
+</body>
+</html>

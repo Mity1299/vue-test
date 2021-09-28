@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+<div id="app">
+<!--    只会渲染数组中最后一个被浏览器支持的值。
+在本例中，如果浏览器支持不带浏览器前缀的 flexbox，那么就只会渲染 display: flex-->
+    <div :style="{ display: ['-webkit-box', '-ms-flexbox', 'flex'] }">
+        测试
+    </div>
+</div>
+<script>
+    Vue.createApp({}).mount('#app');
+</script>
+</body>
+</html>

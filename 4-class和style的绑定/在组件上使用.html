@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+<div id="app">
+    <my-component class="baz boo" :class="{active: isActive}"></my-component>
+</div>
+<script>
+    const app = Vue.createApp({
+        data(){
+            return{
+                isActive:null
+            }
+        }
+    });
+
+    app.component('my-component',{
+        template: `<p class="foo bar">Hi !</p>`
+    })
+
+
+    const vm = app.mount('#app');
+
+    vm.$data.isActive = true;
+</script>
+</body>
+</html>

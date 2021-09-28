@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+<div id="app">
+    <div>Message:{{message}}</div>
+    <div v-once>once message: {{message}}</div>
+    <input v-model="message">
+    <div>{{rawHtml}}</div>
+    <div v-html="rawHtml"></div>
+
+</div>
+<script>
+    const MyVueInst = {
+        data(){
+            return {
+                message:"hello vue!",
+                rawHtml:"<div style=\"color: red\">this should be red</div>"
+            }
+        }
+    }
+
+    Vue.createApp(MyVueInst).mount("#app")
+</script>
+
+</body>
+</html>

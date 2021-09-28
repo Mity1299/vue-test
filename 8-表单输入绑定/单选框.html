@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+<div id="v-model-radiobutton">
+    <input type="radio" id="one" value="one" v-model="picked">
+    <label for="one">one</label>
+    <input type="radio" id="two" value="two" v-model="picked">
+    <label for="two">two</label>
+    <input type="radio" id="three" value="three" v-model="picked">
+    <label for="three">three</label>
+</div>
+<script>
+    Vue.createApp({
+        data(){
+            return {
+                picked: ''
+            }
+        }
+    }).mount('#v-model-radiobutton')
+</script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/vue@next"></script>
+    <style>
+        .demo-alert-box{
+            background-color: lightcoral;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <alert-box>
+        测试~~
+    </alert-box>
+</div>
+<script>
+    const app = Vue.createApp({})
+
+    app.component('alert-box',{
+        template:`
+            <div class="demo-alert-box">
+                <strong>Error!</strong>
+                <slot></slot>
+            </div>
+        `
+    })
+
+    app.mount('#app')
+</script>
+</body>
+</html>

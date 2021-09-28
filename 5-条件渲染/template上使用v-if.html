@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+<div id="app">
+    <template v-if="ok == 1">
+        <h1>yes, I'm the first</h1>
+        <p>Paragraph 1</p>
+        <p>Paragraph 2</p>
+    </template>
+    <template v-else-if="ok == 2">
+        <h1>Oh~ I'm second</h1>
+    </template>
+    <template v-else>
+        <h1>I HAVE NOTHING LEFT</h1>
+    </template>
+    <input type="input" v-model="ok">
+
+</div>
+<script>
+    Vue.createApp({
+        data(){
+            return {
+                ok: 1
+            }
+        }
+    }).mount('#app')
+</script>
+</body>
+</html>
