@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        https://v3.cn.vuejs.org/guide/introduction.html#%E7%BB%84%E4%BB%B6%E5%8C%96%E5%BA%94%E7%94%A8%E6%9E%84%E5%BB%BA</title>
+    <!--    一个简单的todo组件-->
+</head>
+<body>
+<div id="todo-list-app">
+    <todo-item v-for="item in groceryList"
+               v-bind:todo="item"
+               v-bind:key="item.id">
+    </todo-item>
+</div>
+<script src="https://unpkg.com/vue@next"></script>
+<script>
+    const TodoList = {
+        data() {
+            return {
+                groceryList: [
+                    {id: 0, text: 'Vegetables'},
+                    {id: 1, text: 'Cheese'},
+                    {id: 2, text: 'Whatever else humans are supposed to eat'}
+                ]
+            }
+        }
+    }
+
+    const app = Vue.createApp(TodoList);
+
+    app.component('todo-item',{
+        props:['todo'],
+        template:`
+          <li>{{todo.text}}</li>
+        `
+    })
+
+    app.mount('#todo-list-app');
+
+</script>
+</body>
+</html>

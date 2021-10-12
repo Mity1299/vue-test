@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>动态指令参数</title>
+    <script src="https://unpkg.com/vue@next"></script>
+
+</head>
+<body>
+<div id="app" style="height: 200px;background: antiquewhite;overflow: scroll">
+    <div style="height: 600px">
+        <p>Scroll down the page</p>
+<!--        滚动条-->
+        <input type="range" min="0" max="500" v-model="pinPadding">
+        <p v-pin:[direction]="pinPadding">Stick me {{ pinPadding + 'px' }} from the {{ direction || 'top' }} of the page</p>
+    </div>
+
+</div>
+
+<script>
+    const app = Vue.createApp({
+        data(){
+            return {
+                direction: 'right',
+                pinPadding: 200
+
+            }
+        }
+    });
+
+
+
+    app.directive('pin',{
+        mounted(el, binding) {
+            el.style.position = 'fixed'
+            const s = binding.arg || 'top'
+            el.style[s] = binding.value + 'px'
+        },
+        //添加了更新的钩子
+        updated(el, binding) {
+            const s = binding.arg || 'top'
+            el.style[s] = binding.value + 'px'
+        }
+    })
+
+    app.mount('#app')
+</script>
+
+</body>
+</html>

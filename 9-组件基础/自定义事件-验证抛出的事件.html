@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>验证抛出的事件</title>
+</head>
+<body>
+<div id="app"></div>
+<script>
+    const app = Vue.createApp({})
+    app.component('custom-form',{
+        emits:{
+            //没有验证
+            click:null,
+            //验证submit事件
+            submit:({email,password}) => {
+                if(email && password) return true;
+                else{
+                    console.warn('Invalid submit event payload!');
+                    return false;
+                }
+            },
+            methods:{
+                submitForm(email, password){
+                    this.$emit('submit',{email,password});
+                }
+            }
+        }
+    })
+
+    app.mount('#app');
+</script>
+<script src="https://unpkg.com/vue@next"></script>
+
+</body>
+</html>

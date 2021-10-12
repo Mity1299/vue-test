@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>动态指令参数</title>
+    <script src="https://unpkg.com/vue@next"></script>
+
+</head>
+<body>
+<div id="app" style="height: 200px;background: antiquewhite;overflow: scroll">
+    <div style="height: 600px">
+        <p>Scroll down the page</p>
+        <p v-pin="150">Stick me 1500px from te top of the page</p>
+    </div>
+
+</div>
+
+<script>
+    const app = Vue.createApp({});
+    app.directive('pin',{
+        mounted(el,binding){
+            el.style.position = 'fixed';
+            el.style.top = binding.value + 'px';
+        }
+    })
+
+    app.mount('#app')
+</script>
+
+</body>
+</html>

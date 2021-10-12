@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/vue@next"></script>
+    <style>
+        .component-fade-enter-active,
+        .component-fade-leav-active{
+            transition: opacity 0.3s ease;
+        }
+
+        .component-fade-enter-from,
+        .component-fade-leave-to{
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+<div id="demo">
+    <input v-model="view" type="radio" value="v-a" id="a"><label for="a">A</label>
+    <input v-model="view" type="radio" value="v-b" id="b"><label for="b">B</label>
+    <transition name="component-fade" mode="out-in">
+        <component :is="view"></component>
+    </transition>
+</div>
+<script>
+    const Demo = {
+        data(){
+            return {
+                view: 'v-a'
+            }
+        },
+        components:{
+            'v-a':{
+                template: `<div>component A</div>`
+            },
+            'v-b':{
+                template: `<div>component B</div>`
+            }
+        }
+    }
+
+    Vue.createApp(Demo).mount('#app');
+</script>
+</body>
+</html>

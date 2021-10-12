@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/vue@next"></script>
+    <!--    这里仅实验了最常用的out-in过渡模式-->
+    <style>
+        body{
+            margin: 30px;
+        }
+
+        #demo{
+            position:relative;
+        }
+
+        button{
+            position: absolute;
+        }
+
+        .mode-fade-enter-active,
+        .mode-fade-leave-active{
+            transition: opacity 0.5s ease;
+        }
+
+        .mode-fade-enter-from,
+        .mode-fade-leave-to{
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+<div id="demo">
+<!--    <transition name="mode-fade" mode="in-out">-->
+    <transition name="mode-fade" mode="out-in">
+        <button v-if="on" key="on" @click="on = false">on</button>
+        <button v-else key="off" @click="on = true">off</button>
+    </transition>
+</div>
+
+<script>
+    const Demo = {
+        data(){
+            return {
+                on:false
+            }
+        }
+    }
+
+    Vue.createApp(Demo).mount('#demo')
+</script>
+
+</body>
+</html>

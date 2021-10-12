@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>处理v-model修饰符</title>
+    <script src="https://unpkg.com/vue@next"></script>
+
+</head>
+<body>
+<div id="app">
+    <my-component v-model.capitalize="myText"></my-component>
+</div>
+<script>
+    const app = Vue.createApp({
+        data(){
+            return{
+                myText:"hello world"
+            }
+        }
+    })
+
+    app.component('my-component', {
+        props: {
+            modelValue: String,
+            modelModifiers: {
+                default: () => ({})
+            }
+        },
+        emits: ['update:modelValue'],
+        template: `
+          <input type="text"
+                 :value="modelValue"
+                 @input="emitValue"
+          >
+        `,
+        methods:{
+            emitValue(e){
+                let value = e.target.value;
+                if(this.modelModifiers.capitalize){
+                    value = value.charAt(0).toUpperCase() + value.slice(1);
+                    this.$emit('update:modelValue',value);
+                }
+            }
+        },
+        created() {
+            console.log(this.modelModifiers);
+        }
+    })
+
+    app.mount('#app');
+</script>
+</body>
+</html>
