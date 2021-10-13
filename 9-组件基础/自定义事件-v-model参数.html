@@ -10,20 +10,41 @@
 <div id="app">
 <!--    组件上，v-model和props传参有啥区别？单向绑定和双向绑定的区别吗？-->
     <my-component v-model:title="bookTitle"></my-component>
+    {{bookTitle}}
 </div>
 
 <script src="https://unpkg.com/vue@next"></script>
 <script>
-    const app = Vue.createApp({});
+    const app = Vue.createApp({
+        data:function () {
+            return{
+                bookTitle:'测试'
+            }
+        }
+    });
 
     app.component('my-component',{
         props:{
             title:String
         },
         emits:['update:title'],
+        data:function(){
+            return {
+                test:null,
+            }
+        },
+        watch:{
+            test:function (newVal,oldVal) {
+                this.$emit('update:title',newVal);
+            }
+        },
         template:`
-          <input type="text" :value="title" @input="$emit('update:title', $event.target.value)">
+          <input type="text"
+                 v-model="test">
         `
+        // template:`
+        //   <input type="text" :value="title" @input="$emit('update:title', $event.target.value)">
+        // `
     })
 
     app.mount('#app');

@@ -6,21 +6,28 @@
 </head>
 <body>
 <div id="app">
-    <div v-for="(question,index) in questions">
-        <form
-            description="question.description"
-            type="question.type"
-            options="question.options"
-            v-model="myAnswer"
-        ></form>
-        <bottom-nav question-index="currentIndex" my-answer="myAnswer">
+    <div v-for="(question,index) in questionInfos">
+        <keep-alive>
+            <question-form
+                :question-id="question.id"
+                :description="question.description"
+                :type="question.type"
+                :options="question.options"
+                v-if="question.id === currentIndex"
+            ></question-form>
 
-        </bottom-nav>
+        </keep-alive>
     </div>
+    <bottom-nav :question-index="currentIndex"
+                :question-length="questionInfos.length"
+                @update-index="updateIndex">
+
+    </bottom-nav>
 </div>
     <script src="../../node_modules/vue/dist/vue.js"></script>
-    <script src="components/bottomNav.js"></script>
-    <script src="components/form.js"></script>
+    <script src="utils/eventBus.mjs" type="module"></script>
+    <script src="components/bottomNav.mjs" type="module"></script>
+    <script src="components/form.mjs" type="module"></script>
     <script src="index.js"></script>
 </body>
 </html>

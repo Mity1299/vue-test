@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<!--    <script src="https://unpkg.com/vue@next"></script>-->
+    <script src="../../../node_modules/vue/dist/vue.js"></script>
+
+</head>
+<body>
+<div id="app">
+    <question-form
+            :question-id="question.id"
+            :description="question.description"
+            :type="question.type"
+            :options="question.options"
+            @update-answer="updateAnswer($event)"
+            v-show="question.id === currentIndex"
+    ></question-form>
+    数据回显：{{test}}
+
+</div>
+<script src="../components/form.js"></script>
+<script>
+    const app = new Vue({
+        el: '#app',
+        data() {
+            return {
+                question:
+                    {
+                        "id": 1,
+                        "description": "请问您的性别是？",
+                        "type": "radio",
+                        "options": [
+                            {"id": 1, "description": "男"},
+                            {"id": 2, "description": "女"},
+                            {"id": 3, "description": "不告诉你"}
+                        ]
+                    },
+                test:null,
+                currentIndex:1
+            }
+        },
+        methods:{
+            updateAnswer:function (val){
+                this.test = val;
+            }
+        }
+    })
+
+</script>
+
+</body>
+</html>

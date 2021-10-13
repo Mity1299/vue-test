@@ -1,29 +1,29 @@
 [
   {
-    "id": "1",
-    "question": "请问您的性别是？",
+    "id": 1,
+    "description": "请问您的性别是？",
     "type": "radio",
     "options":[
-      {"id": "1","description":"男"},
-      {"id": "2","description":"女"},
-      {"id": "3","description":"不告诉你"}
+      {"id": 1,"description":"男"},
+      {"id": 2,"description":"女"},
+      {"id": 3,"description":"不告诉你"}
     ]
   },
   {
-    "id": "2",
-    "question": "请问你的兴趣爱好？",
+    "id": 2,
+    "description": "请问你的兴趣爱好？",
     "type": "checkbox",
     "options":[
-      {"id": "1","description":"看书"},
-      {"id": "2","description":"游泳"},
-      {"id": "3","description":"跑步"},
-      {"id": "4","description":"看电影"},
-      {"id": "5","description":"其他"}
+      {"id": 1,"description":"看书"},
+      {"id": 2,"description":"游泳"},
+      {"id": 3,"description":"跑步"},
+      {"id": 4,"description":"看电影"},
+      {"id": 5,"description":"其他"}
     ]
   },
   {
-    "id": "2",
-    "question": "请介绍一下自己",
+    "id": 3,
+    "description": "请介绍一下自己",
     "type": "textarea"
   }
 ]

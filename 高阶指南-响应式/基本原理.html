@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>基本原理</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+<script>
+    //维持一个执行副作用（effects）的栈
+    const runningEffects = [];
+    const createEffect = fn => {
+        const effect = () => {
+            //这是个啥，为什么要自己push自己
+            runningEffects.push(effect);
+            fn();
+            runningEffects.pop();
+        }
+
+        //立即执行
+        effect();
+    }
+    const updateSum = () => {
+        sum = val1 + val2;
+    }
+</script>
+
+
+</body>
+</html>
