@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/vue@next"></script>
+
+</head>
+<body>
+<div id="app">
+    <anchored-heading :level="1">Hello world!</anchored-heading>
+    你好呀
+</div>
+
+<script>
+    const {createApp,h} = Vue;
+    const app = createApp({});
+    app.component('anchored-heading',{
+        render(){
+            return h(
+                'h' + this.level,
+                {},//prop或attribute
+                this.$slots.default()
+            )
+        },
+        props:{
+            level:{
+                type:Number,
+                required: true
+            }
+        }
+    })
+
+    app.mount('#app')
+
+</script>
+</body>
+</html>
