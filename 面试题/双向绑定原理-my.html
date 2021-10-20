@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>myVue</title>
+    <meta charset="utf-8">
+</head>
+<style>
+    #app {
+        text-align: center;
+    }
+</style>
+<body>
+<div id="app">
+    <form>
+        <input type="text" v-model="number">
+        <button type="button" v-click="increment">增加</button>
+    </form>
+    <h3 v-bind="number"></h3>
+    <form>
+        <input type="text" v-model="count">
+        <button type="button" v-click="incre">增加</button>
+    </form>
+    <h3 v-bind="count"></h3>
+</div>
+<script src="myVue.js"></script>
+<script>
+    window.onload = function() {
+        var app = new myVue({
+            el:'#app',
+            data: {
+                number: 0,
+                count: 0,
+            },
+            methods: {
+                increment: function() {
+                    this.number ++;
+                },
+                incre: function() {
+                    this.count ++;
+                }
+            }
+        })
+    }
+
+</script>
+</body>
+</html>
