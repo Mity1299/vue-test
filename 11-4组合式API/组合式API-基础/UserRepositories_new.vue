@@ -7,7 +7,9 @@ import RepositoriesFilters from './RepositoriesFilters.vue';
 import RepositoriesSortBy from './RepositoriesSortBy.vue';
 import RepositoriesList from './RepositoriesList.vue';
 import { fetchUserRepositories } from '@/api/repositories';
-import { ref, onMounted, watch, toRefs} from 'vue'
+import { fetchUserRepositories } from '@/api/repositories';
+import { ref, onMounted, watch, toRefs,computed} from 'vue';
+
 
 export default {
   components: { RepositoriesFilters, RepositoriesSortBy, RepositoriesList },
@@ -38,10 +40,20 @@ export default {
     watch(user,getUserRepositories);
 
 
+    const searchQuery = ref('')
+    const repositoriesMatchingSearchQuery = computed(() => {
+      return repositories.value.filter(
+          repository => repository.name.includes(searchQuery.value)
+      )
+    })
+
     //这里返回的任何内容都可以用于组件的其余部分
     return {
       repositories,
       getUserRepositories,
+      searchQuery,
+      repositoriesMatchingSearchQuery
+
     };
   },
   data () {
