@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<!--    一个非 prop 的 attribute 是指传向一个组件，
+但是该组件并没有相应 props 或 emits 定义的 attribute。
+常见的示例包括 class、style 和 id 属性。-->
+<!--    这里的data-status，就是一个非prop的attribute-->
+
+</head>
+<body>
+<div id="app">
+    <!-- 具有非prop attribute的Date-picker组件-->
+    <date-picker data-status="activated"></date-picker>
+</div>
+<script src="https://unpkg.com/vue@next"></script>
+<script>
+    const app = Vue.createApp({
+        data(){
+        }
+    })
+
+    app.component('date-picker', {
+        template: `
+            <div class="date-picker">
+                <input type="datetime-local" data-status="activated"/>
+            </div>
+        `,
+    })
+
+    app.mount('#app');
+</script>
+</body>
+</html>

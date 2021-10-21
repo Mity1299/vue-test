@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<!--
+{{num}}
+for(let i=0; i<100000; i++){
+    num = i
+}
+
+意义：
+如果没有 nextTick 更新机制，那么 num 每次更新值都会触发视图更新(上面这段代码也就是会更新10万次视图)
+有了nextTick机制，只需要更新一次，所以nextTick本质是一种优化策略
+
+
+使用场景：
+如果想要在修改数据后立刻得到更新后的DOM结构，可以使用Vue.nextTick()
+
+-->
+</head>
+<body>
+<div id="app">
+    {{message}}
+</div>
+<script src="https://unpkg.com/vue@next"></script>
+<script>
+    const app = Vue.createApp({
+        data() {
+            return {
+                message:'修改前'
+            }
+
+        }
+    });
+    const vm = app.mount('#app');
+    // 修改数据
+    vm.message = '修改后的值'
+    // DOM 还没有更新
+    console.log(vm.$el.textContent) // 原始的值
+    Vue.nextTick(function () {
+        // DOM 更新了
+        console.log(vm.$el.textContent) // 修改后的值
+    })
+
+</script>
+</body>
+</html>

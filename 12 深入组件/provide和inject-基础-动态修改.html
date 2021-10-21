@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <todo-list>
+        <todo-list-statistics>
+
+        </todo-list-statistics>
+    </todo-list>
+</div>
+<script src="https://unpkg.com/vue@next"></script>
+<script>
+    const app = Vue.createApp({})
+
+    app.component('todo-list', {
+        data() {
+            return {
+                todos: ['Feed a cat', 'Buy tickets']
+            }
+        },
+        // provide: {
+        //     user: 'John Doe',
+        //     todoLength: this.todos.length//这样会报错
+        //
+        // },
+        //这里改变了
+        provide(){
+            return {
+                user: 'John Doe',
+                // todoLength: this.todos.length//这种写法没有响应性
+                //接受一个 getter 函数，并根据 getter 的返回值返回一个不可变的响应式 ref 对象。
+                todoLength: Vue.computed(() => this.todos.length)//这样才有响应性
+            }
+        },
+        template: `
+          <div>
+              <button @click="addTodoList">添加</button>
+              <p v-for="todo in todos">
+                {{todo}}
+              </p>
+              <slot></slot>
+          </div>
+        `,
+        methods:{
+            addTodoList(){
+                this.todos.push('go shopping');
+            }
+        }
+    })
+
+    app.component('todo-list-statistics', {
+        template: `<div>
+            myUser:{{user}},total tasks:{{todoLength}}</div>`,
+        inject: ['user','todoLength'],
+        created() {
+            console.log(`Injected property: ${this.user}`) // > 注入 property: John Doe
+        }
+    })
+
+    app.mount('#app');
+</script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<!--    Vue.observable，让一个对象变成响应式数据。Vue 内部会用它来处理 data 函数返回的对象
+返回的对象可以直接用于渲染函数和计算属性内，并且会在发生变更时触发相应的更新。也可以作为最小化的跨组件状态存储器
+
+-->
+</head>
+<body>
+<div id="app">
+    <div>
+        姓名：{{ name }}
+        年龄：{{ age }}
+        <button @click="changeName('李四')">改变姓名</button>
+        <button @click="setAge(18)">改变年龄</button>
+    </div>
+
+</div>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script>
+let state = Vue.observable({
+    name: '张三',
+    'age': 38
+})
+// 创建对应的方法
+let mutations = {
+    changeName(name) {
+        state.name = name
+    },
+    setAge(age) {
+        state.age = age
+    }
+}
+
+const app = new Vue({
+    el:'#app',
+    computed: {
+        name() {
+            return state.name
+        },
+        age() {
+            return state.age
+        }
+    },
+    // 调用mutations里面的方法，更新数据
+    methods: {
+        changeName: mutations.changeName,
+        setAge: mutations.setAge
+    }
+})
+
+</script>
+</body>
+</html>

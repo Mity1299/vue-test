@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <todo-list>
+<!--        提供插槽的prop名称，这里slotProps可以拿到子组件通过slot传递的内容-->
+        <template v-slot:default="slotProps">
+            <i class="fas fa-check"></i>
+            <span class="green">{{ slotProps.item }}</span>
+        </template>
+    </todo-list>
+
+</div>
+<script src="https://unpkg.com/vue@next"></script>
+<script>
+    const app = Vue.createApp({
+
+    });
+    app.component('todo-list', {
+        data() {
+            return {
+                items: ['Feed a cat', 'Buy milk']
+            }
+        },
+        template:
+        `
+            <ul>
+              <li v-for="(item, index) in items">
+                <slot :item="item"></slot>
+              </li>
+            </ul>
+        `
+    })
+
+    app.mount('#app');
+
+</script>
+</body>
+</html>

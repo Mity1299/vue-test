@@ -27,29 +27,42 @@ myVue.prototype._obverse = function (obj) {
      */
     let _this = this;
 
-    for(key in obj){
+    Object.keys(obj).forEach(function (key) {
+    // for(key in obj){
         if(obj.hasOwnProperty(key)){
-            if(typeof obj[key] === 'object'){
+            let value = obj[key];
+            if(typeof value === 'object'){
                 _this._obverse(obj[key]);
             }
 
-            _this._binding[key] = {};
-            _this._binding[key].directive = [];//这里注册了指令的watcher
-            let value = obj[key];
+            _this._binding[key] = {//这里注册了指令的watcher
+                directive: [],
+            };
+            let binding = _this._binding[key];
+
+
             Object.defineProperty(obj,key,{
+            // Object.defineProperty(obj,key,{
                 enumerable: true,
                 configurable: true,
                 get(){
                     return value;
                 },
-                set(val){
-                    _this._binding[key].directive.forEach(item => {
-                        item.update();
-                    })
+                set(newVal){
+                    if(value !== newVal){
+                        // obj[key] = newVal;//这么写会鬼畜循环，应该是因为obj[key]的语法糖其实会触发set
+                        value = newVal;//记得更新data的值
+
+                        _this._binding[key].directive.forEach(item => {
+                            item.update();
+                        })
+
+                    }
+
                 }
             })
         }
-    }
+    })
 
 
 
@@ -64,7 +77,7 @@ myVue.prototype._complie = function (root) {
      * 3. 解析v-bind指令，当vue实例数据改变时，更新dom的html内容
      */
     let _this = this;
-    let nodes = Array.from(root.children);
+    let nodes = root.children;
     for (var i = 0; i < nodes.length; i++) {
         let node = nodes[i]
         if(node.children.length > 0){

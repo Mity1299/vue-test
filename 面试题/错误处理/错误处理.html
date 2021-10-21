@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app" v-cloak>
+    <cat name="my cat">
+        <kitten></kitten>
+    </cat>
+</div>
+
+
+<script src="https://unpkg.com/vue@next"></script>
+<script>
+
+
+    const app = Vue.createApp({
+    });
+
+    app.config.errorHandler = function (err, vm, info) {
+        // handle error
+        // `info` 是 Vue 特定的错误信息，比如错误所在的生命周期钩子
+        // 只在 2.2.0+ 可用
+    }
+
+    app.component('cat', {
+        template:`
+        <div>
+			<h1>Cat: </h1>
+        	<slot></slot>
+        </div>`,
+        props:{
+            name:{
+                required:true,
+                type:String
+            }
+        },
+        errorCaptured(err,vm,info) {
+            console.log(`cat EC: ${err.toString()}\ninfo: ${info}`);
+            return false;
+        }
+
+    });
+
+    app.component('kitten', {
+        template:'<div><h1>Kitten: {{ dontexist() }}</h1></div>',
+        props:{
+            name:{
+                required:true,
+                type:String
+            }
+        },
+    });
+
+
+    app.mount('#app');
+
+</script>
+</body>
+</html>

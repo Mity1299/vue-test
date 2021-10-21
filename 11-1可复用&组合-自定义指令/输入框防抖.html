@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button @click="sayHello" v-throttle>提交</button>
+
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script>
+    Vue.directive('throttle',{
+        bind:(el, binding, vnode, oldVnode) => {
+            let throttleTime = binding.value;//防抖时间
+            if(!throttleTime){
+                throttleTime = 2000;
+            }
+
+            let cbFun;
+            el.addEventListener('click', event =>{
+                if(!cbFun){
+                    cbFun = setTimeout(() => {
+                        cbFun = null;
+                    },throttleTime);
+                }else{
+                    event && event.stopImmediatePropagation();
+                }
+            }, true);
+        }
+    })
+</script>
+</body>
+</html>

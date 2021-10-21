@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <p v-for="(value, key) in items" :key="key">
+        {{value}}
+    </p>
+    <button @click="addProperty">动态添加属性</button>
+    <button @click="addPropertyCorrectly">正确地动态添加属性 Vue.set</button>
+    <button @click="addPropertyCorrectly2">正确地动态添加属性2 Object.assign</button>
+    <button @click="addPropertyCorrectly3">正确地动态添加属性3 force</button>
+</div>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script>
+    const app = new Vue({
+        el:"#app",
+        data:{
+            items:{
+                oldProperty:"旧属性"
+            }
+        },
+        methods:{
+            addProperty(){
+                //Vue 不允许在已经创建的实例上动态添加新的响应式属性
+                this.items.newProperty = "新属性"  // 为items添加新属性
+                console.log(this.items)  // 输出带有newProperty的items
+            },
+            addPropertyCorrectly(){
+                //调用Vue.set来更新，其实本质上还是重新进行了数据劫持
+                Vue.set(this.items, "newProperty", "新属性");
+                console.log(this.items)
+
+            },
+            addPropertyCorrectly2(){
+                this.items = Object.assign({},{newProperty2:"新属性2"},this.items);
+                console.log(this.items)
+            },
+            addPropertyCorrectly3(){
+                this.items.newProperty3 = "新属性3"  // 为items添加新属性
+                this.$forceUpdate();
+                console.log(this.items)  // 输出带有newProperty的items
+            }
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--
+        在日常的开发中，我们经常会遇到在不同的组件中经常会需要用到一些相同或者相似的代码，这些代码的功能相对独立
+        这时，可以通过Vue的mixin功能将相同或者相似的代码提出来
+    -->
+</head>
+<body>
+<div id="app">
+    <modal></modal>
+    <tooltip></tooltip>
+</div>
+
+
+<script src="https://unpkg.com/vue@next"></script>
+<script>
+    const toggle = {
+        data() {
+            return {
+                isShowing: false
+            }
+        },
+        methods: {
+            toggleShow() {
+                this.isShowing = !this.isShowing;
+            }
+        }
+    }
+
+    const Modal = {
+        name: 'modal',
+        template: `
+          <div>
+          <button @click="toggleShow">点击</button>
+          <span v-show="isShowing">modal</span>
+          </div>
+        `,
+        mixins: [toggle]
+    };
+
+    const Tooltip = {
+        name: 'tooltip',
+        template: `
+          <div>
+          <button @click="toggleShow">点击</button>
+          <span v-show="isShowing">tooltip</span>
+          </div>`,
+        mixins: [toggle]
+    }
+
+    const app = Vue.createApp({
+        components: {
+            Tooltip, Modal
+        },
+    })
+    app.mount('#app');
+</script>
+</body>
+</html>

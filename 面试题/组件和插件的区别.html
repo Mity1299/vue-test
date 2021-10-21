@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script>
+    Vue.component('componentA',{
+        template:`<div>你好呀</div>`,
+    })
+
+    //插件
+    MyPlugin.install = function (Vue, options) {
+        //添加全局方法或property
+        Vue.myGlobalMethod = function () {
+
+        }
+
+        //添加全局资源
+        Vue.directive('my-directive', {
+            bind(el,binding,vnode,oldVnode){
+
+            }
+        })
+
+        //3. 注入组件选项
+        Vue.mixin({
+            created:function () {
+
+            }
+        })
+
+        //4. 添加实例方法
+        Vue.prototype.$myMethod = function (methodOptions) {
+
+        }
+    }
+
+    //注册插件
+    Vue.use(MyPlugin,{})
+</script>
+</body>
+</html>

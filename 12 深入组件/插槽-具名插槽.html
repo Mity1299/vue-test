@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+<div id="app">
+    <container>
+        <template v-slot:header>
+            <h1>this is a page title</h1>
+        </template>
+
+        <template>
+            <p>a paragraph for a main content.</p>
+            <p>and another one.</p>
+        </template>
+
+        <template v-slot:footer>
+            <p>here's some contact info</p>
+        </template>
+    </container>
+</div>
+
+
+<script src="https://unpkg.com/vue@next"></script>
+<script>
+
+    const Container = {
+        name: 'container',
+        template: `
+            <div class="container">
+                <header>
+                    <slot name="header"></slot>
+                </header>
+
+                <main>
+                    <slot></slot>
+                </main>
+
+                <footer>
+                    <slot name="footer"></slot>
+                </footer>
+            </div>
+        `,
+    }
+
+
+    const app = Vue.createApp({
+        components:{Container},
+    })
+
+
+    app.mount('#app');
+</script>
+</body>
+</html>

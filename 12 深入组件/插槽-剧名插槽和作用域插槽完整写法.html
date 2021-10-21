@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<todo-list>
+<!--    :default指的是具名插槽，与<slot name="default">对应
+    v-slot="slotProps"和<slot :item=item>  slotProps.item相对应
+-->
+    <template v-slot:default="slotProps">
+        <i class="fas fa-check"></i>
+        <span class="green">{{ slotProps.item }}</span>
+    </template>
+
+    <template v-slot:other="otherSlotProps">
+        ...
+    </template>
+</todo-list>
+
+</body>
+</html>

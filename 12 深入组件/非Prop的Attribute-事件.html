@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <date-picker @change="showChange" class="parent-class"></date-picker>
+</div>
+
+<script src="https://unpkg.com/vue@next"></script>
+<script>
+    const app = Vue.createApp({
+        methods: {
+            showChange(event) {
+                console.log(event.target.value) // 将记录所选选项的值
+            }
+        },
+
+
+
+    });
+
+    app.component('date-picker', {
+        inheritAttrs:false,
+        template: `
+            <select>
+              <option value="1">Yesterday</option>
+              <option value="2" v-bind="$attrs">Today</option>
+              <option value="3">Tomorrow</option>
+            </select>
+          `,
+        created() {
+            //包含了父作用域中不作为组件 props 或自定义事件的 attribute 绑定和事件。
+            console.log(this.$attrs); // { onChange: () => {}  }
+            console.log(this.$attrs.onChange);
+            console.log(this.$attrs.class);
+        }
+    })
+
+    app.mount('#app');
+</script>
+</body>
+</html>

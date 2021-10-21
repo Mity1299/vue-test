@@ -8,8 +8,8 @@
 
 <script>
 export default {
-name: "my-article",
-  props:['articles']
+name: "article",
+  props:['article']
 }
 </script>
 

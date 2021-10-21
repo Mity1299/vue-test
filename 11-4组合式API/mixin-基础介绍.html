@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<!--
+Mixin类通常作为功能模块使用，在需要该功能时“混入”，
+有利于代码复用又避免了多继承的复杂
+
+如果冲突：
+如果是普通选项，则优先使用组件的
+如果是生命周期钩子，则优先使用maxin，再执行组件的
+-->
+</head>
+<body>
+<script src="https://unpkg.com/vue@next"></script>
+<script>
+
+    var myMixin = {
+        created: function () {
+            this.hello()
+        },
+        methods: {
+            hello: function () {
+                console.log('hello from mixin!')
+            }
+        }
+    }
+    //局部混入
+    Vue.component('componentA',{
+        mixins: [myMixin]
+    })
+    //全局混入
+    Vue.mixin({
+        created: function () {
+            console.log("全局混入")
+        }
+    })
+
+
+
+</script>
+
+</body>
+</html>
