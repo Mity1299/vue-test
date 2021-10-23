@@ -90,7 +90,6 @@ myVue.prototype._complie = function (root) {
             continue;
         }
 
-        //TODO 核查tagname
         if(node.hasAttribute('v-model') && (node.tagName === 'INPUT' || node.tagName === 'TEXTAREA')){
 
             let attrVal = node.getAttribute('v-model');
